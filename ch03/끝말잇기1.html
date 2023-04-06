@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>끝말잇기</title>
+</head>
+<body>
+  <div>1<span id="order">번째 참가자</span></div>
+  <div>제시어<span id="word"></span></div>
+  <input type="text">
+  <button>입력</button>
+  <script>
+    const nOfPlayer = Number(prompt('몇 명이 참가하나요?'));
+    const $input = document.querySelector('input');
+    const $button = document.querySelector('button');
+    let word;
+
+    $button.addEventListener( // 이벤트의 등록만 했음
+    'click',
+    (event) => { console.log("버튼누름2");}
+    );
+    $input.addEventListener(
+      'input',
+      (event) => {
+        console.log('이벤트가 발생한 글자 ', event.target);
+        console.log('입력한 글자 ', event.target.value);
+      }
+    );
+  </script>
+</body>
+</html>

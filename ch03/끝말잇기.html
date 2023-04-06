@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>끝말잇기</title>
+</head>
+<body>
+  <div>1<span id="order">번째 참가자</span></div>
+  <div>제시어<span id="word"></span></div>
+  <input type="text">
+  <button>1</button>
+  <!-- <button class="hello">2</button>
+  <button class="hello">3</button> -->
+  <script>
+    // 자바스크립트 코드 작성
+    // const nOfPlayer = prompt('몇 명이 참가하나요?'); // 실행의 결과는 string type
+    // 입력값을 number type 으로 변경하기
+    // 1. parseInt(str)
+    //    - const nOfPlayer = parseInt(prompt('몇 명이 참가하나요?'));
+    // 2. Number(str)
+    //    - const nOfPlayer = Number(prompt('몇 명이 참가하나요?'));
+    // const nOfPlayer = Number(prompt('몇 명이 참가하나요?'));
+    
+    // console.log('typeof : ', (typeof nOfPlayer))
+    // alert('typeof : '+ (typeof nOfPlayer))
+    // confirm('진짜로 시작할꺼임? 일본어 외워야지!')
+    // tag를 저장하는 변수명은 $로 시작하는것이 규칙
+
+    // input tag 선택
+    // const $input = document.querySelector('input');
+    // input tag 의 element object
+    // const $input = document.getElementsByTagName('input');
+    // HTMLCollection : 배열과 유사
+    // console.log($input);
+
+    // button tag 선택
+    // const $button = document.querySelector('button');
+    // console.log($button);
+
+    // 모든 button tag 선택
+    // NodeList : 배열과 유사
+    // const $$button = document.querySelectorAll('button');
+    // console.log($$button);
+
+    // 해당 id를 가지는 tag 선택
+    // const $order = document.querySelector('#order');
+    // const $word = document.querySelector('#word');
+    // const $orderOld = document.getElementById('order');
+    // console.log($order);
+    // console.log($word , $orderOld);
+
+    // const $buttons = document.querySelectorAll('.hello');
+    // document.querySelectorAll('.hello'); 여러개가 있으면
+    // 최초의 엘리먼트가 선택됨
+    // const $buttons = document.getElementsByClassName('.hello');
+    // console.log($buttons);
+
+    // #container
+    // #container > div:nth-child(1)
+    // id 가 container 인 요소의 자식 요소중 첫번째 div
+    // 요소를 선택함
+    // # => id 
+    // > 기호는 직계 자식 선택자를 나타냄
+    // `nth-child()`는 `div` 요소중 n 번째 자식 요소를 선택
+
+    /* 
+      img
+      input
+      br
+      <br><br /> <br></br> 
+    */
+
+
+    // 화살표 함수로 함수 정의
+    // const onClickBtn = (event) => {
+    //   console.log('버튼누름');
+    // }; 
+    // 버튼을 누를 때 마다 이벤트가 발생
+
+    const $button = document.querySelector('button');
+    // $button.addEventListener(
+    //   'click',    // 이벤트명
+    //   onClickBtn  // 이벤트리스터 (함수) : 함수의 이름을 지정해야함, 함수호출하면 안됨
+    //   // 호출은 이벤트가 발생하면 JS 엔진이 실행시켜줌
+    //   // callback 콜백 함수라고 부른다.
+    //   // 함수가 호출되는데 프로그래머가 명시적으로 
+    //   // ()로 호출하는것이 아니고
+    //   // JS 엔진이 실행 시켜줄때 callback 이라는 용어로 사용
+    //  ); 
+
+    $button.addEventListener('click',
+    // function onClickBtn(event){
+    //   console.log("버튼누름1");
+    // }
+    (event) => { console.log("버튼누름2");}
+    // event => {console.log("버튼누름3");}
+
+    // 따로 정의하여 사용하는 것 보다 바로 여기에
+    // 정의하여 사용하는것이 가독성이 더 좋다고 한다.
+    );
+
+    const $input = document.querySelector('input');
+    console.log($input);
+    $input.addEventListener(
+      'input',
+      (event) => {
+        console.log('입력한 글자 ', event.target);
+        console.log('입력한 글자 ', event.target.value);
+      }
+    ); // 입력할 때 마다 이벤트 발생 
+  </script>
+</body>
+</html>
