@@ -7,7 +7,7 @@
   <title>끝말잇기</title>
 </head>
 <body>
-  <div>1<span id="order">번째 참가자</span></div>
+  <div><span id="order">1</span>번째 참가자</div>
   <div>제시어: <span id="word"></span></div>
   <input type="text">
   <button>입력</button>
@@ -23,6 +23,7 @@
     const $input = document.querySelector('input');
     const $button = document.querySelector('button');
     const $word = document.querySelector('#word'); // span 태그 엘리먼트 선택
+    const $order = document.querySelector('#order');
 
     let jesiWord; // 초기값 : undefined
     let inputtedWord; // 게임 참가자가 입력한 단어 저장
@@ -35,6 +36,19 @@
         // 제시어가 비어있으니 입력한 단어를 제시어로 저장한 후 화면에 표시
         jesiWord = inputtedWord; // 입력한 단어를 제시어로 저장
         $word.textContent = jesiWord; 
+
+        // const order = Number($order.innerHTML);
+        // if (order + 1 > nOfPlayer) {
+        //   $order.innerHTML = 1;
+        // }else{
+        //   $order.innerHTML = order++;
+        // }
+        
+        let order = Number($order.innerHTML);
+        $order.innerHTML = (order++)%nOfPlayer+1;
+        $input.value = '';
+        $input.focus();
+
       }else{ // 제시어가 비어 있지 않다
         // 입력한 단어가 올바른지 구현
         if(jesiWord[jesiWord.length-1] === inputtedWord[0]){
@@ -42,10 +56,25 @@
           alert('올바름');
 
           jesiWord = inputtedWord; // 입력한 단어를 제시어로 저장
-          $word.textContent = jesiWord; 
+          $word.textContent = jesiWord;
+          
+          // const order = Number($order.innerHTML);
+          // if (order + 1 > nOfPlayer) {
+          //   $order.innerHTML = 1;
+          // }else{
+          //   $order.innerHTML = order++;
+          // }
+
+          let order = Number($order.innerHTML);
+          $order.innerHTML = (order++)%nOfPlayer+1;
+
+          $input.value = '';
+          $input.focus(); 
         }else{
           // 입력 단어가 올바르지 않음
           alert('틀림');
+          $input.value = '';
+          $input.focus();
         }
       }
     }
