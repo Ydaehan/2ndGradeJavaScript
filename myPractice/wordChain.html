@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word-Chain</title>
+</head>
+<body>
+  <div><span id="order">1</span>번째 참가자</div>
+  <div>제시어: <span id="word"></span></div>
+  <input type="text">
+  <button>입력</button>
+  <script>
+    const nOfPlayer = Number(prompt("몇 명이 참가 하십니까?"));
+    const $order = document.querySelector('#order');
+    const $word = document.querySelector('#word');
+    const $input = document.querySelector('input');
+    const $button = document.querySelector('button');
+    // 참가자 수 입력받기
+    let suggestedWord; // undefined 상태
+    let inputtedWord; // 입력 받아 저장시킬 변수
+
+    // 순서 값을 받는 count
+    let count = (Number)($order.textContent);
+    // 버튼을 클릭 했을 때? 
+    $button.addEventListener(
+      'click',
+      (event) => {
+        // 첫번째 사람이 제시어를 입력
+        if(!suggestedWord){
+          // 제시어가 존재 하지 않음
+          alert("Correct!")
+          suggestedWord = inputtedWord;
+          $word.textContent = suggestedWord;
+          // 첫사람이 입력 후 순서($order 값) + 1 증가
+          $order.textContent = (count++)%nOfPlayer+1;
+        }else{
+          // 제시어가 존재함
+          // 올바른 제시어인지 아닌지 확인
+          if(suggestedWord[suggestedWord.length - 1] == inputtedWord[0]){
+            alert("Correct!");
+            suggestedWord = inputtedWord;
+            $word.textContent = suggestedWord;
+            // 맞다면 순서($order 값) + 1 증가
+            $order.textContent = (count++)%nOfPlayer+1;
+          }else{
+            alert("inCorrect");
+          }
+        }
+        // input 창에 남아있는 값을 지워주고
+        // input 창으로 포커싱을 해준다.
+        $input.value = "";
+        $input.focus();
+      }
+    )
+    
+    $input.addEventListener(
+      'input',
+      (event) => {
+        // input을 한 경우 입력 받은 값을 inputtedWord 에 저장해야함 
+        inputtedWord = event.target.value;
+      }
+    )
+  </script>
+</body>
+</html>
