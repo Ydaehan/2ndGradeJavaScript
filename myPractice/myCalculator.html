@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyCalculator</title>
+  <style>
+    * { box-sizing: border-box;}
+    #result { width: 180px; height: 50px; margin: 5px; text-align: right; background-color: gold; border: solid black 1px;}
+    #operator {width: 50px; height: 50px; margin: 5px; text-align: center; background-color: aqua; border: solid black 1px;}
+    button { width: 50px; height: 50px; margin: 5px;}
+  </style>
+</head>
+<body>
+  <input readonly type="text" id="operator">
+  <input readonly type="number" id="result">
+  <div class="row">
+    <button id="num-7">7</button>
+    <button id="num-8">8</button>
+    <button id="num-9">9</button>
+    <button id="plus">+</button>
+  </div>
+  <div class="row">
+    <button id="num-4">4</button>
+    <button id="num-5">5</button>
+    <button id="num-6">6</button>
+    <button id="minus">-</button>
+  </div>
+  <div class="row">
+    <button id="num-1">1</button>
+    <button id="num-2">2</button>
+    <button id="num-3">3</button>
+    <button id="divide">/</button>
+  </div>
+  <div class="row">
+    <button id="clear">C</button>
+    <button id="num-0">0</button>
+    <button id="calculate">=</button>
+    <button id="multiply">*</button>
+  </div>
+<script>
+  let numOne = '';
+  let operator = '';
+  let numTwo = '';
+  const $operator = document.querySelector('#operator');
+  const $result = document.querySelector('#result');
+
+  const clickNum = (event) => {
+    if(operator){ // operator 가 존재하면?
+      // numTwo 에 수 저장
+      numTwo += event.target.textContent;
+    }else{
+      numOne += event.target.textContent;
+    }
+    $result.value += event.target.textContent;
+  };
+
+  const clickOp = (event) => {
+    if(numOne){
+      $result.value = '';
+      operator = event.target.textContent;
+      $operator.value = event.target.textContent;
+    }else{
+      alert('숫자를 먼저 입력하세요.');
+    }
+  };
+
+  const setInfinityCalculate = (resultNum) => {
+    numOne = resultNum;
+    $result.value = resultNum;
+    numTwo = '';
+    operator = '';
+    $operator.value = operator;
+  }
+
+  // const clickOp = (op) => () =>{
+  //   if(numOne){
+  //     operator = op;
+  //     $operator.value = op;
+  //   }else{
+  //     alert('숫자를 먼저 입력하세요.');
+  //   }
+  // };
+
+  /* 숫자를 눌렀을 때 입력되는 이벤트 생성하기 */
+  document.querySelector('#num-0').addEventListener('click',clickNum);
+  document.querySelector('#num-1').addEventListener('click',clickNum);
+  document.querySelector('#num-2').addEventListener('click',clickNum);
+  document.querySelector('#num-3').addEventListener('click',clickNum);
+  document.querySelector('#num-4').addEventListener('click',clickNum);
+  document.querySelector('#num-5').addEventListener('click',clickNum);
+  document.querySelector('#num-6').addEventListener('click',clickNum);
+  document.querySelector('#num-7').addEventListener('click',clickNum);
+  document.querySelector('#num-8').addEventListener('click',clickNum);
+  document.querySelector('#num-9').addEventListener('click',clickNum);
+
+  /* 연산자를 눌렀을 때 입력되는 이벤트 생성하기 */
+  document.querySelector('#plus').addEventListener('click',clickOp);
+  document.querySelector('#minus').addEventListener('click',clickOp);
+  document.querySelector('#divide').addEventListener('click',clickOp);
+  document.querySelector('#multiply').addEventListener('click',clickOp);
+  
+  /* = 연산자 클릭 시 계산 결과를 출력하기 */
+  document.querySelector('#calculate').addEventListener('click',()=>{
+    if(numTwo){
+      switch (operator) {
+        case '+':
+          resultNum = parseInt(numOne) + parseInt(numTwo)
+          setInfinityCalculate(resultNum);
+          break;
+
+        case '-':
+          resultNum = numOne - numTwo;
+          setInfinityCalculate(resultNum);
+          break;
+
+        case '/':
+          resultNum = numOne / numTwo;
+          setInfinityCalculate(resultNum);  
+          break;
+
+        case '*':
+          resultNum = numOne * numTwo;
+          setInfinityCalculate(resultNum);
+          break;
+
+        default:
+          break;
+      }
+    }
+  });
+  /* C : clear 버튼을 눌렀을 때 모든 변수 초기화 */
+  document.querySelector('#clear').addEventListener('click',(event)=>{
+    $result.value = $operator.value = numOne = numTwo = operator = '';
+  })
+</script>
+</body>
+</html>
