@@ -122,23 +122,20 @@
           // 숫자로 바꾸어 주지 않기 때문에 형변환을
           // 해주어야 한다.
           resultNum = parseInt(numOne) + parseInt(numTwo)
-          setValCalculate(resultNum);
           break;
         case '-':
           resultNum = numOne - numTwo;
-          setValCalculate(resultNum);
           break;
         case '*':
           resultNum = numOne * numTwo;
-          setValCalculate(resultNum);
           break;
         case '/':
           resultNum = numOne / numTwo;
-          setValCalculate(resultNum);
           break;
         default:
           break;
       }
+      setValCalculate(resultNum);
     } else {
       alert('숫자를 먼저 입력하세요.');
     }
