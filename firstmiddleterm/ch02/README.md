@@ -235,10 +235,10 @@
       `condition1 ? 'condition1이 참' : condition2 ? 'condition2가 참' : '둘 다 거짓';`<br>
       이러한 식이 있을 경우 들여쓰기를 사용하면<br>
       `condition1`<br>
-        `? 'condition1이 참'`<br>
-          `: condition2`<br>
-          `? 'condition2가 참'`<br>
-           `: '둘 다 거짓';`<br>
+      ` ? 'condition1이 참'`<br>
+      `   : condition2`<br>
+      `   ? 'condition2가 참'`<br>
+      `     : '둘 다 거짓';`<br>
       혹은 소괄호로 묶어
       `condition1 ? 'condition1이 참' : (condition2 ? 'condition2가 참' : '둘 다 거짓');`<br>
       처럼 표현 할 수 있다.
