@@ -38,12 +38,12 @@
 - 여기서는 입력값을 자바스크립트로 검사하지만, HTML 자체에서도 입력값 검사 기능을 제공함
 - 브라우저에서 JS code를 실행하지 않는 경우도 있으므로 (사용자가 브라우저 환경 설정에서 JS code를 실행하지 않게 설정가능) HTML로도 검사해 보는 것이 좋다
 
-ex)
-` <input`
-`   required`
-`   type="text"`
-`   id="input"`
-`   minlength="4" maxlength="4" pattern="^(?!.*.(.).*\1)\d{4}$">`
+ex)<br>
+` <input`<br>
+`   required`<br>
+`   type="text"`<br>
+`   id="input"`<br>
+`   minlength="4" maxlength="4" pattern="^(?!.*.(.).*\1)\d{4}$">`<br>
 
 `^(?!.*.(.).*\1)\d{4}$` : 정규 표현식 => 주로 회원가입 등에 사용이 된다.
 - 위 정규 표현식은 중복되지 않은 4자리 숫자를 의미

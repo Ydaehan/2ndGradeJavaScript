@@ -4,30 +4,30 @@
 - 중복을 제거하고 싶으면 함수의 특성을 이요한다
 - 함수를 호출하면 어떤 갑을 반환하는데 이 값은 숫자나 문자열, 불 값 등으로 제한되어 있지 않고 자바스크립트의 모든 자료형이 될 수 있다
 **즉 함수가 함수를 반환할수도 있다는 말이다.**
-ex)
-` const func = () => {`
-`   return () => {`
-`     console.log('hello');`
-`   };`
-` };`
-- 반환 된 함수는 다른 변수에 저장할 수 있고 변수에 저장된 함수를 다시 호출할 수도 있다.
-` const innerFunc = Func();`
-` innerFunc(); // hello`
+ex)<br>
+` const func = () => {`<br>
+`   return () => {`<br>
+`     console.log('hello');`<br>
+`   };`<br>
+` };`<br>
+- 반환 된 함수는 다른 변수에 저장할 수 있고 변수에 저장된 함수를 다시 호출할 수도 있다.<br>
+` const innerFunc = Func();`<br>
+` innerFunc(); // hello`<br>
 
 - hello 라는 문자열을 다른 값으로 바꾸고 싶다면?
-- 매개변수를 넣어 주면 된다.
-` const func = (msg) => {`
-`   return () => {`
-`     console.log(msg);`
-`   };`
-` };`
+- 매개변수를 넣어 주면 된다.<br>
+` const func = (msg) => {`<br>
+`   return () => {`<br>
+`     console.log(msg);`<br>
+`   };`<br>
+` };`<br>
 **위와 같이 함수를 만드는 함수를 고차함수(high order function) 이라고 한다**
 - 참고로 화살표 함수 문법에 따라 함수의 본문에서 바로 반환되는 값이 있으면 `{`와 `return`을 생략 할 수 있다.
-ex)
-`   const func = (msg) => () => {`
-`     console.log(msg);`
-`   };`
-` };`
+ex)<br>
+`   const func = (msg) => () => {`<br>
+`     console.log(msg);`<br>
+`   };`<br>
+` };`<br>
 
 ## 중첩 if 문 줄이기
 - 중첩 `if` 문이란 `if문` 안에 `if문`이 중첩되어 존재하는 경우를 일컷는 말이다.
