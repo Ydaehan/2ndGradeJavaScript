@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>쿵쿵따</title>
+</head>
+<body>
+  <!-- 기본 구조는 끝말잇기와 동일 -->
+  <!-- 인원을 입력 받을 때 취소를 하면 다음 코드가 실행되지 않게 수정 -->
+  <!-- 입력 글자는 세글자가 아니라면 다시 입력하도록 표시 -->
+  <div><span id="order">1</span>번째 유저차례</div>
+  <div>제시어 : <span id="word"></span></div>
+  <input type="text">
+  <button>입력</button>
+  <script>
+    // option 1
+    // number 를 let 변수로 선언하여 값을 변경할 수 있도록 한 후
+    // 만약 취소를 누른다면 올바른 값을 입력할 때 까지 prompt창을 띄움
+    let number = Number(prompt('게임을 할 인원을 입력하세요.'));
+    while(number === 0){
+      alert('올바른 인원 수를 입력하세요.');
+      number  = Number(prompt('게임을 할 인원을 입력하세요.'));  
+    }
+    // 태그들을 선택 
+    const $order  = document.querySelector('#order');
+    const $word   = document.querySelector('#word');
+    const $input  = document.querySelector('input');
+    const $button = document.querySelector('button');
+
+    let word;   // 제시어
+    let newWord;// 현재 입력 단어
+    // 태그들이 실행할 콜백함수(이벤트함수를 선언)
+    // 입력창에 글을 입력할 때 글을 저장
+    const onInput = (event) => {
+      newWord = event.target.value; // 현재 input창의 단어를 현재 입력 단어 변수에 저장
+    }
+
+    const onClickButton = () => {
+      // button을 클릭 했을 때
+      if ((!word || word[word.length-1] === newWord[0]) && newWord.length === 3) { // 제시어가 비었을 때 및 입력단어가 올바를 때 및 세글자 이내
+        word = newWord;
+        $word.textContent = word;
+        // 단어를 입력 하였을 경우 
+        // 순서를 다음 사람으로 넘김
+        const order = Number($order.textContent);
+        if (order + 1 > number) {
+          // 한바퀴 돌면 다시 첫번째 사람으로
+          $order.textContent = 1;
+        } else {
+          // 덜 돌았으면 다음 사람으로
+          $order.textContent = order + 1;
+        }
+      } else {
+          // 일치 하지 않는다면 경고창
+          alert('다시 입력하세요.');
+        }
+      // input 창에 입력되어 있는 것을 초기화
+      $input.value = '';
+      $input.focus(); // input 창에 바로 입력할 수 있도록 focus를 맞춤
+    };
+    
+    // 이벤트 리스너
+    $button.addEventListener('click', onClickButton);
+    $input.addEventListener('input',onInput);
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>word_chain</title>
+</head>
+<body>
+  <!-- 차례를 표시 -->
+  <div><span id="order">1</span>번째 참가자</div>
+  <div>제시어: <span id="word"></span></div>
+  <input type="text">
+  <button>입력</button>
+  <!-- 단어를 표시 및 입력할 input창 -->
+  
+  <!-- 단어를 입력 후 차례를 넘길 버튼 -->
+  
+  <script>
+    /* 태그 선택 및 인원 수 입력 받기 */
+    const number  = Number(prompt('몇명이 참가하나요?'));
+    const $button = document.querySelector('button');
+    const $input  = document.querySelector('input');
+    const $word   = document.querySelector('#word');
+    const $order  = document.querySelector('#order');
+
+    let word; // 제시어
+    let newWord; // 현재 단어
+
+    /* 이벤트 함수 ( 콜백 함수 ) */
+    const onClickButton = () => {
+      // 버튼을 클릭했을 때 동작하는 함수
+      if (!word || word[word.length - 1] === newWord[0]) {
+        // 제시어가 비었을 때 혹은 올바르게 입력 하였을 때
+        word = newWord;
+        $word.textContent = word;
+        const order = Number($order.textContent);
+        // 순서 표시
+        if(order + 1 > number) {
+          // order (차례)의 다음 값이 number(게임 인원수) 
+          // 의 값 보다 크다면 다시 1번 순서로 값 변경
+          $order.textContent = 1;
+        } else {
+          // 아니라면 현재 차례의 다음 차례를 표기
+          $order.textContent = order + 1;
+        } 
+      } else {
+          // 올바르지 않은 경우
+          alert('올바르지 않습니다. 다시입력해주세요.')
+        }
+        $input.value = '';
+        $input.focus(); // input창을 비운 후 바로 입력할 수 있도록
+        // focus를 맞춰준다.
+      };
+      
+      const onInput = (event) => {
+      // input 창에 글을 입력 하였을 때의 이벤트 함수
+      newWord = event.target.value; // 입력하는 단어를 현재 단어로
+    }; 
+    
+    /* 특정 조건시 이벤트 호출 */
+    $input.addEventListener('input', onInput);
+    $button.addEventListener('click', onClickButton);
+  </script>
+</body>
+</html>
