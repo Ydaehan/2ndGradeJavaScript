@@ -20,35 +20,60 @@
     const $input = document.querySelector('#input');
     const $form = document.querySelector('#form');
     const $logs = document.querySelector('#logs');
-    const $reset =  document.querySelector('#resetButton').addEventListener("click", ()=>{
+    const $reset =  document.querySelector('#resetButton');
+    let answer = [];
+    $reset.addEventListener("click", ()=>{
       tries.splice(0,tries.length);
       $logs.value = '';
       $logs.textContent = $logs.value;
       $gCount.value = '';
+      $gCount.textContent = `${tries.length + 1} 번째`;
+      answer.splice(0,answer.length);
+      gameSet(answer);
+      hideBtn();
+      
     }); // 게임이 끝나고 다시 하기
+    
+    function hideBtn () {
+      if($gCount.value === undefined || $gCount.value === ''){
+      $reset.style.display = 'none';
+      }
+    }
+    hideBtn();
+    
 
     /* const numbers = [];
     for (let n = 1; n <= 9; n += 1){
       numbers.push(n)
     } */
      
+    const getRNum = (n,m) => Math.floor(
+      Math.random()*(m-n+1)
+    )+n;
+
+    gameSet(answer);
 
     // 중복 처리를 위한 numbers 라는 배열로 가져올 값의 범위 만큼 중복없이 생성
     // 이 배열에서 하나 씩 빼온다는 개념
-    const numbers = Array(9).fill().map((v,i)=>i+1)
-    // 야구게임의 정답을 미리 중복되지 않는 4개의 수를 배열로 저장
-    const answer = [];
-    for (let n = 0; n <= 3; n += 1) { // repeat four times
-      /* console.log(numbers); */
-      const index = getRNum(0,numbers.length-1);  // 0~8 integer
-      answer.push(numbers[index]);
-      numbers.splice(index, 1);       // array 의 index 위치에 1개를 삭제
-      /* console.log(numbers); */
+    
+    function gameSet (answer) {
+      const numbers = Array(9).fill(1).map((v,i)=>i+v);
+      // console.log(numbers);
+      // 야구게임의 정답을 미리 중복되지 않는 4개의 수를 배열로 저장
+      
+      for (let n = 0; n <= 3; n += 1) { // repeat four times
+        /* console.log(numbers); */
+        const index = getRNum(0,numbers.length-1);  // 0~8 integer
+        answer.push(numbers[index]);
+        numbers.splice(index, 1);       // array 의 index 위치에 1개를 삭제
+        /* console.log(numbers); */
+      }
+      console.log(answer);
     }
-    console.log(answer);
+    
 
     // 사용자가 입력한 값의 예외 처리
-    const tries = [];
+    let tries = [];
     $gCount.textContent = `${tries.length + 1} 번째`;
     function checkInput (input) {
       if (input.length !== 4) {
@@ -75,6 +100,7 @@
     
 
     // 버튼을 눌렀을 때의 게임의 동작
+    let out = 0;
     $form.addEventListener('submit', (event) => {
       event.preventDefault(); // 이벤트의 기본 동작을 중지시키고, 해당 이벤트가
       // 발생할 때 호출될 사용자 정의 로직을 실행 할 수 있도록 합니다.
@@ -89,37 +115,61 @@
       if (answer.join('') === value) {
         $logs.textContent = '홈런!'; 
         const tries = [];
-        document.querySelector('#resetButton').style.display = "block";
+        $reset.style.display = 'block';
         return;
       }
       if ($gCount.value >= 9) {
         const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
         $logs.appendChild(message);
         // $logs.textContent = `패배! 정답은 ${answer.join('')}`;
-        document.querySelector('#resetButton').style.display = "block";
+        // 기존의 로그들이 다 사라지기 때문에 사용 x
+        $reset.style.display = 'block';
         return;
       }
       $gCount.textContent = `${gCount.value + 2} 번째`;
       // 몇 스트라이크 몇 볼인지 검사
       let strike = 0;
       let ball = 0;
-      for(let i = 0; i < answer.length; i++) {
-        const index = value.indexOf(answer[i]);
-        if(index > -1) {    // 일치하는 숫자 발견
-          if(index === i) { // 자릿수도 같음
+      // for(let i = 0; i < answer.length; i++) {
+      //   const index = value.indexOf(answer[i]);
+      //   if(index > -1) {    // 일치하는 숫자 발견
+      //     if(index === i) { // 자릿수도 같음
+      //       strike += 1;
+      //     } else {  // 숫자만 같음
+      //       ball += 1;
+      //     }
+      //   }
+      // }
+      // 위의 코드를 forEach로 수정하기
+      answer.forEach((element,aIndex) => {
+        const index = value.indexOf(String(element));
+        // String() : 문자열 객체를 생성하는 함수
+        // Number() : 숫자 객체를 생성하는 함수
+        // Date(), Array() ...
+        if (index > -1) {
+          if(index === aIndex) {
             strike += 1;
-          } else {  // 숫자만 같음
+          } else {
             ball += 1;
           }
         }
+      }); 
+
+      if (strike === 0 && ball === 0) {
+        out++;
+        $logs.append(`${value} : ${out} 아웃!`, document.createElement('br'));
+        if (out === 3) {
+          $logs.append(`${out} 아웃으로 패배 했습니다.`, document.createElement('br'));
+          $reset.style.display = 'block';
+          return;
+        }
+      } else {
+        $logs.append(`${value} : ${strike} 스트라이크 ${ball} 볼` , document.createElement('br'));
       }
-      $logs.append(`${value} : ${strike} 스트라이크 ${ball} 볼` , document.createElement('br'));
       tries.push(value);
     });
 
-    if($gCount.value == undefined){
-      $reset.style.display = "none";
-    }
+    
   </script>
 </body>
 </html>
