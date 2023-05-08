@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>가위바위보</title>
+  <style>
+    #computer{
+      width: 142px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="computer"></div>
+  <div>
+    <button id="scissors" class="btn">가위</button>
+    <button id="rock" class="btn">바위</button>
+    <button id="paper" class="btn">보</button>
+  </div>
+
+  <div id="score"></div>
+
+  <script>
+    const $computer = document.querySelector('#computer');
+    const $score = document.querySelector('#score');
+    const $rock = document.querySelector('#rock');
+    const $scissors = document.querySelector('#scissors');
+    const $paper = document.querySelector('#paper');
+    const IMG_URL = './img/rsp.png';
+
+    // const scissorsX = '0';
+    // const rockX = '-220px';
+    // const paperX = '-440px';
+    // ===> 객체로 표현
+    const rspX = {
+      // key : value 의 형태
+      scissors : '0',   // 가위
+      rock : '-220px',  // 바위
+      paper : '-440px', // 보
+    }
+
+    // $computer.style.background = `url(${IMG_URL}) ${rspX.scissors} 0`; // scissors
+    // $computer.style.background = `url(${IMG_URL}) ${rockX} 0`; // rock
+    // $computer.style.background = `url(${IMG_URL}) ${paperX} 0`; // paper
+    // $computer.style.backgroundSize = 'auto 200px'; // width, height
+
+    let computerChoice = 'scissors'; // 가위
+    const changeComputerHand = () => {
+      if (computerChoice === 'rock') {
+        computerChoice = 'scissors';
+      } else if (computerChoice === 'scissors'){
+        computerChoice = 'paper';
+      } else if (computerChoice === 'paper') {
+        computerChoice = 'rock';
+      }
+      $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
+      $computer.style.backgroundSize = 'auto 200px';
+      // setTimeout(changeComputerHand,50); // 0.05초에 changeComputerHand() 를 호출
+      // 재귀호출
+    }
+    // setTimeout(changeComputerHand,50);
+    let intervalId = setInterval(changeComputerHand,50);
+    const clickBtn = (e) => {
+      clearInterval(intervalId);
+      setTimeout(() => {intervalId = setInterval(changeComputerHand,50);}, 2000);
+    };
+    $scissors.addEventListener('click',clickBtn);
+    $rock.addEventListener('click',clickBtn);
+    $paper.addEventListener('click',clickBtn);
+  </script>
+</body>
+</html>

@@ -14,3 +14,7 @@
 // alt + shift + a => 여러 줄 주석
 
 >>>>>>> Stashed changes
+
+document.querySelector('button').addEventListener('click', () => {
+  
+})

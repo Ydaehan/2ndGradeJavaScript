@@ -9,6 +9,11 @@ const zerocho = {
 
 let a = zerocho.name.last;
 let b = zerocho['name']['last'];
+let c = zerocho.name['last'];
+let d = zerocho['name'].last;
 console.log(a === b);
 console.log(a);
 console.log(b);
+console.log(c);
+console.log(d);
+

@@ -17,26 +17,26 @@
   <input readonly id="operator">
   <input type="number" id="result">
   <div class="row">
-    <button id="num-7">7</button>
-    <button id="num-8">8</button>
-    <button id="num-9">9</button>
-    <button id="plus">+</button>
+    <button id="num-7" class="numberBtn">7</button>
+    <button id="num-8"class="numberBtn">8</button>
+    <button id="num-9"class="numberBtn">9</button>
+    <button id="plus"class="numberBtn">+</button>
   </div>
   <div class="row">
-    <button id="num-4">4</button>
-    <button id="num-5">5</button>
-    <button id="num-6">6</button>
-    <button id="minus">-</button>
+    <button id="num-4"class="numberBtn">4</button>
+    <button id="num-5"class="numberBtn">5</button>
+    <button id="num-6"class="numberBtn">6</button>
+    <button id="minus"class="numberBtn">-</button>
   </div>
   <div class="row">
-    <button id="num-1">1</button>
-    <button id="num-2">2</button>
-    <button id="num-3">3</button>
+    <button id="num-1"class="numberBtn">1</button>
+    <button id="num-2"class="numberBtn">2</button>
+    <button id="num-3"class="numberBtn">3</button>
     <button id="divide">/</button>
   </div>
   <div class="row">
     <button id="clear">C</button>
-    <button id="num-0">0</button>
+    <button id="num-0"class="numberBtn">0</button>
     <button id="calculate">=</button>
     <button id="multiply">x</button>
   </div>
@@ -60,14 +60,23 @@
     $result.value += event.target.textContent;
   };
 
-  const onClickOperator = (op) => () => {
+  // const onClickOperator = (op) => () => {
+  //   if (numOne) {
+  //     operator = op;
+  //     $operator.value = op;
+  //   } else {
+  //     alert('숫자를 먼저 입력하세요');
+  //   }
+  // };
+
+  const onClickOperator = (event) => {
     if (numOne) {
-      operator = op;
-      $operator.value = op;
+      operator = event.target.textContent;
+      $operator.value = operator;
     } else {
       alert('숫자를 먼저 입력하세요');
     }
-  };
+  } 
 
   const continueCal = () => {
     numOne = $result.value;
@@ -75,28 +84,26 @@
     numTwo = '';
     $operator.value = '';
   }
+
   const onClickCal = () => {
     if (numTwo) {
       switch (operator) {
         case '+' :
           $result.value = parseInt(numOne) + parseInt(numTwo);
-          continueCal();
           break;
         case '-' :
           $result.value = numOne - numTwo;
-          continueCal();
           break;
         case '/' :
           $result.value = numOne / numTwo;
-          continueCal();
           break;
-        case '*' :
+        case 'x' :
           $result.value = numOne * numTwo;
-          continueCal();
           break;
         default :
           break;
       }
+      continueCal();
     } else {
       alert('숫자를 먼저 입력하세요.');
     }
@@ -109,20 +116,23 @@
     $operator.value = '';
     $result.value   = '';
   }
-  document.querySelector('#num-0').addEventListener('click',onClickNum);
-  document.querySelector('#num-1').addEventListener('click',onClickNum);
-  document.querySelector('#num-2').addEventListener('click',onClickNum);
-  document.querySelector('#num-3').addEventListener('click',onClickNum);
-  document.querySelector('#num-4').addEventListener('click',onClickNum);
-  document.querySelector('#num-5').addEventListener('click',onClickNum);
-  document.querySelector('#num-6').addEventListener('click',onClickNum);
-  document.querySelector('#num-7').addEventListener('click',onClickNum);
-  document.querySelector('#num-8').addEventListener('click',onClickNum);
-  document.querySelector('#num-9').addEventListener('click',onClickNum);
-  document.querySelector('#plus').addEventListener('click',onClickOperator('+'));
-  document.querySelector('#minus').addEventListener('click',onClickOperator('-'));
-  document.querySelector('#divide').addEventListener('click',onClickOperator('/'));
-  document.querySelector('#multiply').addEventListener('click',onClickOperator('*'));
+  
+  document.querySelectorAll('.numberBtn').forEach((node) => node.addEventListener('click',onClickNum));
+
+  // document.querySelector('#num-0').addEventListener('click',onClickNum);
+  // document.querySelector('#num-1').addEventListener('click',onClickNum);
+  // document.querySelector('#num-2').addEventListener('click',onClickNum);
+  // document.querySelector('#num-3').addEventListener('click',onClickNum);
+  // document.querySelector('#num-4').addEventListener('click',onClickNum);
+  // document.querySelector('#num-5').addEventListener('click',onClickNum);
+  // document.querySelector('#num-6').addEventListener('click',onClickNum);
+  // document.querySelector('#num-7').addEventListener('click',onClickNum);
+  // document.querySelector('#num-8').addEventListener('click',onClickNum);
+  // document.querySelector('#num-9').addEventListener('click',onClickNum);
+  document.querySelector('#plus').addEventListener('click',onClickOperator);
+  document.querySelector('#minus').addEventListener('click',onClickOperator);
+  document.querySelector('#divide').addEventListener('click',onClickOperator);
+  document.querySelector('#multiply').addEventListener('click',onClickOperator);
   document.querySelector('#calculate').addEventListener('click',onClickCal);
   document.querySelector('#clear').addEventListener('click',onClickClear);
 </script>

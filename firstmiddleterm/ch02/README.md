@@ -50,10 +50,10 @@
 *따라서 == 와 != 대신 === 와 !== 연산자를 사용해 자료형까지 정확히 비교하기를 권장*
 
 ## 형 변환을 했을때 false 값을 가지는 값
-- `!!false` : false    => !false->true => !true->**false**
-- `!!''`    : '':false => !''->true    => !true->**false**
-- `!!0`     : 0:false  => !0->true     => !true->**false**
-- `!!NaN`   : NaN:false=> !NaN->true   => !true->**false**
+- `!!false` : false    => !false->true => !true-> **false**
+- `!!''`    : '':false => !''->true    => !true-> **false**
+- `!!0`     : 0:false  => !0->true     => !true-> **false**
+- `!!NaN`   : NaN:false=> !NaN->true   => !true-> **false**
 
 - 이렇게 형 변환을 하였을 때 false가 되는 값을 **거짓인 값(falsy value)** 이라고 하고
 - 이렇게 형 변환을 하였을 때 true 가 되는 값을 **참인 값(truthy value)** 이라고 함
@@ -204,8 +204,8 @@
 - 조건문에는 if문 외에도 `switch`문이 존재
 - `switch`문에는 조건식 두개가 사용된다.
 - 형식
-  switch (*조건식*) {
-    case *비교 조건식*:
+  switch ( *조건식* ) {
+    case *비교 조건식* :
       실행문;
   }
 - 보통 조건식 에 변수를 넣고, 비교 조건식에는 변수와 비교할 값을 넣는다.
@@ -344,7 +344,7 @@
   `function a() {}` : 이처럼 함수를 상수에 대입하지 않고 function keyword 뒤에 함수 이름을 넣는 방식을 **함수 선언문(function declaration statement)**이라고 한다
   `const b = function() {};` 
   `const c = () => {};`
-  : 위에 상수에 함수를 넣은 것처럼 함수를 상수나 변수에 대입하는 방식을 **함수 표현식(function expression)**이라고 한다
+  : 위에 상수에 함수를 넣은 것처럼 함수를 상수나 변수에 대입하는 방식을 **함수 표현식(function expression)** 이라고 한다
 - 함수 a 를 선언한 후 a 뒤에 ()를 붙이면 함수가 실행 된다.
 
 ### return 이해하기
